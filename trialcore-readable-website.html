@@ -1,0 +1,1696 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!--
+    TRIALCORE WEBSITE
+    -----------------
+    This file is intentionally organized for easy editing.
+
+    QUICK EDIT GUIDE:
+    1. Change website text in the HTML sections below.
+    2. Change colors in the :root section of the CSS.
+    3. Replace the dashboard image by saving a new image with this filename:
+       trialcore-dashboard-preview.png
+    4. The About page is inside this same file. The navigation uses JavaScript
+       to switch between the Home page and About page.
+  -->
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>TrialCore | Modern Clinical Trial Management</title>
+  <meta
+    name="description"
+    content="TrialCore is a modern clinical trial management system for clinical research coordinators, study teams, study administrators, supervisors, and auditors."
+  />
+
+  <style>
+    /* =========================================================
+       1. DESIGN SETTINGS
+       Change these values to update the site colors and spacing.
+       ========================================================= */
+
+    :root {
+      --navy: #0f1b2f;
+      --navy-light: #142746;
+      --blue: #2563ff;
+      --blue-soft: #edf4ff;
+      --background: #f8fafc;
+      --white: #ffffff;
+      --text: #0f172a;
+      --muted: #61708a;
+      --border: #dce5f2;
+      --red: #c62828;
+
+      --max-width: 1180px;
+      --radius-small: 14px;
+      --radius-medium: 22px;
+      --radius-large: 32px;
+
+      --shadow-soft: 0 16px 36px rgba(15, 23, 42, 0.05);
+      --shadow-large: 0 24px 60px rgba(15, 23, 42, 0.08);
+    }
+
+    /* =========================================================
+       2. BASIC PAGE SETUP
+       ========================================================= */
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--background);
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button,
+    input,
+    textarea {
+      font: inherit;
+    }
+
+    img {
+      max-width: 100%;
+    }
+
+    /* =========================================================
+       3. NAVIGATION
+       ========================================================= */
+
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(248, 250, 252, 0.92);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 18px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      font-size: 1rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+
+    .brand-mark {
+      width: 36px;
+      height: 36px;
+      border-radius: 12px;
+      background: var(--navy);
+      color: #7db5ff;
+      display: grid;
+      place-items: center;
+      box-shadow: 0 14px 30px rgba(15, 27, 47, 0.22);
+    }
+
+    .brand-mark svg {
+      width: 19px;
+      height: 19px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      color: var(--muted);
+      font-size: 0.9rem;
+      font-weight: 650;
+    }
+
+    .nav-links a:hover {
+      color: var(--text);
+    }
+
+    /* =========================================================
+       4. BUTTONS
+       ========================================================= */
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+      padding: 0 18px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      font-size: 0.92rem;
+      font-weight: 750;
+      white-space: nowrap;
+      cursor: pointer;
+      transition: 180ms ease;
+    }
+
+    .button:hover {
+      transform: translateY(-1px);
+    }
+
+    .button-primary {
+      background: var(--blue);
+      color: var(--white);
+      box-shadow: 0 14px 28px rgba(37, 99, 255, 0.22);
+    }
+
+    .button-dark {
+      background: var(--navy);
+      color: var(--white);
+      box-shadow: 0 14px 28px rgba(15, 27, 47, 0.18);
+    }
+
+    .button-secondary {
+      background: var(--white);
+      color: var(--text);
+      border-color: var(--border);
+    }
+
+    /* =========================================================
+       5. PAGE ROUTING
+       The Home page and About page both live in this file.
+       JavaScript at the bottom shows one page at a time.
+       ========================================================= */
+
+    .page-view {
+      display: none;
+    }
+
+    .page-view.active {
+      display: block;
+    }
+
+    /* =========================================================
+       6. HERO SECTION
+       This is the main top section of the Home page.
+       ========================================================= */
+
+    .hero {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 96px 32px 88px;
+      display: grid;
+      grid-template-columns: 1fr 0.9fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .hero-content {
+      max-width: 620px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 22px;
+      padding: 7px 12px;
+      border-radius: 999px;
+      background: var(--blue-soft);
+      border: 1px solid #d8e7ff;
+      color: var(--blue);
+      font-size: 0.82rem;
+      font-weight: 800;
+    }
+
+    .eyebrow span {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: var(--blue);
+    }
+
+    h1 {
+      margin-bottom: 26px;
+      color: var(--text);
+      font-size: clamp(2.45rem, 5vw, 4.45rem);
+      line-height: 1.03;
+      letter-spacing: -0.042em;
+      font-weight: 760;
+      text-wrap: balance;
+    }
+
+    .hero h1 {
+      max-width: 10.5ch;
+    }
+
+    .hero p {
+      max-width: 620px;
+      margin-bottom: 32px;
+      color: var(--muted);
+      font-size: 1.05rem;
+      line-height: 1.72;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .hero-note {
+      margin-top: 18px;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .hero-preview {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      min-width: 0;
+    }
+
+    /*
+      Dashboard Image:
+      To replace the image, save a new file named
+      trialcore-dashboard-preview.png in the same folder as this HTML file.
+    */
+
+    .dashboard-image-frame {
+      width: min(100%, 760px);
+      max-width: 760px;
+      margin-left: auto;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      background: var(--white);
+      box-shadow: var(--shadow-large);
+      transform: scale(0.9);
+      transform-origin: center right;
+    }
+
+    .dashboard-image {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    /* =========================================================
+       7. TRUST STRIP
+       ========================================================= */
+
+    .trust-strip {
+      padding: 30px 24px 34px;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      background: linear-gradient(180deg, #ffffff 0%, #f5f8fc 100%);
+    }
+
+    .trust-strip > p {
+      margin-bottom: 24px;
+      color: var(--muted);
+      text-align: center;
+      font-weight: 700;
+    }
+
+    .trust-grid {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+
+    .trust-item {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+
+    .trust-item > span {
+      color: var(--blue);
+      font-size: 1.3rem;
+      font-weight: 900;
+      line-height: 1;
+      margin-top: 2px;
+    }
+
+    .trust-item strong {
+      display: block;
+      margin-bottom: 4px;
+      font-size: 0.95rem;
+      letter-spacing: -0.02em;
+    }
+
+    .trust-item small {
+      display: block;
+      color: var(--muted);
+      font-size: 0.86rem;
+      line-height: 1.45;
+    }
+
+    /* =========================================================
+       8. SHARED SECTION STYLES
+       Used by Platform, Features, Safety, Workflow, Contact, etc.
+       ========================================================= */
+
+    .section {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 76px 24px;
+    }
+
+    .section.compact {
+      padding-top: 48px;
+    }
+
+    .section-header {
+      max-width: 780px;
+      margin-bottom: 42px;
+    }
+
+    .section-header.center {
+      margin-inline: auto;
+      text-align: center;
+    }
+
+    .kicker {
+      margin-bottom: 14px;
+      color: var(--blue);
+      font-size: 0.82rem;
+      font-weight: 900;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+    }
+
+    .section h2,
+    .page-hero h1,
+    .cta h2 {
+      text-wrap: balance;
+    }
+
+    .section h2 {
+      margin-bottom: 18px;
+      font-size: clamp(2rem, 3vw, 3.25rem);
+      line-height: 1.08;
+      letter-spacing: -0.035em;
+      font-weight: 720;
+    }
+
+    .section-header p,
+    .body-text {
+      color: var(--muted);
+      font-size: 1.06rem;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    .split {
+      display: grid;
+      grid-template-columns: 0.95fr 1.05fr;
+      gap: 54px;
+      align-items: center;
+    }
+
+    .stack {
+      display: grid;
+      gap: 16px;
+    }
+
+    .panel,
+    .rail,
+    .feature-card,
+    .story-card,
+    .staff-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .panel {
+      border-radius: 28px;
+      padding: 26px;
+    }
+
+    .panel h3 {
+      margin-bottom: 10px;
+      font-size: 1.55rem;
+      letter-spacing: -0.05em;
+    }
+
+    .feature-card {
+      min-height: 230px;
+      border-radius: var(--radius-large);
+      padding: 24px;
+    }
+
+    .feature-icon {
+      width: 44px;
+      height: 44px;
+      margin-bottom: 30px;
+      border-radius: 13px;
+      background: var(--blue-soft);
+      color: var(--blue);
+      display: grid;
+      place-items: center;
+      font-weight: 900;
+    }
+
+    .feature-card h3 {
+      margin-bottom: 12px;
+      font-size: 1.28rem;
+      letter-spacing: -0.04em;
+    }
+
+    .feature-card p,
+    .rail span,
+    .list-item span {
+      color: var(--muted);
+      font-size: 0.96rem;
+    }
+
+    .rail {
+      border-radius: 18px;
+      padding: 18px;
+    }
+
+    .rail strong {
+      display: block;
+      margin-bottom: 4px;
+      letter-spacing: -0.02em;
+    }
+
+    .list {
+      list-style: none;
+      display: grid;
+      gap: 12px;
+      color: var(--muted);
+    }
+
+    .list li {
+      position: relative;
+      padding-left: 22px;
+    }
+
+    .list li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: var(--blue);
+      font-weight: 900;
+    }
+
+    .check-list {
+      display: grid;
+      gap: 14px;
+    }
+
+    .list-item {
+      display: flex;
+      gap: 14px;
+      padding: 18px;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      background: var(--white);
+    }
+
+    .check {
+      width: 26px;
+      height: 26px;
+      flex: 0 0 auto;
+      display: grid;
+      place-items: center;
+      border-radius: 999px;
+      background: var(--blue);
+      color: var(--white);
+      font-size: 0.85rem;
+      font-weight: 900;
+    }
+
+    .list-item strong {
+      display: block;
+      margin-bottom: 3px;
+      letter-spacing: -0.025em;
+    }
+
+    /* =========================================================
+       9. SAFETY MINI MOCKUP
+       ========================================================= */
+
+    .product-mini {
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      background: var(--background);
+    }
+
+    .product-mini-top {
+      min-height: 50px;
+      padding: 0 16px;
+      background: var(--navy);
+      color: #b7c4d6;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.82rem;
+      font-weight: 800;
+    }
+
+    .product-mini-body {
+      padding: 18px;
+      display: grid;
+      gap: 12px;
+    }
+
+    .mini-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 14px;
+      align-items: center;
+      padding: 13px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: var(--white);
+    }
+
+    .mini-row strong {
+      font-size: 0.88rem;
+    }
+
+    .mini-row small {
+      display: block;
+      margin-top: 3px;
+      color: var(--muted);
+    }
+
+    .pill {
+      padding: 5px 9px;
+      border-radius: 999px;
+      background: var(--blue-soft);
+      color: var(--blue);
+      font-size: 0.72rem;
+      font-weight: 850;
+      white-space: nowrap;
+    }
+
+    /* =========================================================
+       10. ABOUT PREVIEW BAND ON HOME PAGE
+       ========================================================= */
+
+    .about-band {
+      background: var(--white);
+      border-block: 1px solid var(--border);
+    }
+
+    /* =========================================================
+       11. TIMELINE
+       ========================================================= */
+
+    .timeline,
+    .timeline-wide {
+      display: grid;
+      gap: 10px;
+    }
+
+    .timeline {
+      grid-template-columns: repeat(5, 1fr);
+    }
+
+    .timeline-wide {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .timeline-step {
+      min-height: 146px;
+      padding: 18px 14px;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      background: var(--white);
+    }
+
+    .timeline-wide .timeline-step {
+      min-height: 170px;
+    }
+
+    .step-number {
+      width: 30px;
+      height: 30px;
+      margin-bottom: 18px;
+      border-radius: 999px;
+      background: var(--blue-soft);
+      color: var(--blue);
+      display: grid;
+      place-items: center;
+      font-size: 0.78rem;
+      font-weight: 900;
+    }
+
+    .timeline-step strong {
+      display: block;
+      margin-bottom: 8px;
+      letter-spacing: -0.03em;
+    }
+
+    .timeline-step span {
+      color: var(--muted);
+      font-size: 0.86rem;
+    }
+
+    /* =========================================================
+       12. CONTACT FORM
+       ========================================================= */
+
+    .contact-wrap {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 24px;
+      align-items: start;
+    }
+
+    form {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .field {
+      display: grid;
+      gap: 7px;
+    }
+
+    .field.full {
+      grid-column: 1 / -1;
+    }
+
+    label {
+      color: var(--text);
+      font-size: 0.82rem;
+      font-weight: 800;
+    }
+
+    input,
+    textarea {
+      width: 100%;
+      padding: 12px 13px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: var(--white);
+      color: var(--text);
+      outline: none;
+    }
+
+    textarea {
+      min-height: 132px;
+      resize: vertical;
+    }
+
+    input:focus,
+    textarea:focus {
+      border-color: #9bc0ff;
+      box-shadow: 0 0 0 4px rgba(37, 99, 255, 0.10);
+    }
+
+    .form-actions {
+      grid-column: 1 / -1;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      margin-top: 4px;
+    }
+
+    /* =========================================================
+       13. CALL TO ACTION AND FOOTER
+       ========================================================= */
+
+    .cta {
+      max-width: var(--max-width);
+      margin: 0 auto 42px;
+      padding: 0 24px;
+    }
+
+    .cta-inner {
+      padding: 62px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 28px;
+      align-items: center;
+      border-radius: 36px;
+      background: var(--navy);
+      color: var(--white);
+      box-shadow: 0 30px 80px rgba(15, 27, 47, 0.20);
+    }
+
+    .cta h2 {
+      max-width: 760px;
+      margin-bottom: 16px;
+      font-size: clamp(2rem, 3.4vw, 3.35rem);
+      line-height: 1.06;
+      letter-spacing: -0.04em;
+      font-weight: 720;
+    }
+
+    .cta p {
+      max-width: 670px;
+      color: #b8c4d5;
+      font-size: 1.06rem;
+    }
+
+    .cta .button-primary {
+      background: var(--white);
+      color: var(--navy);
+      box-shadow: none;
+    }
+
+    .footer {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 28px 24px 46px;
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    /* =========================================================
+       14. FULL ABOUT PAGE
+       ========================================================= */
+
+    .page-hero {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 92px 24px 56px;
+    }
+
+    .page-hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 0.82fr;
+      gap: 44px;
+      align-items: center;
+    }
+
+    .page-hero h1 {
+      max-width: 900px;
+      font-size: clamp(2.35rem, 4.4vw, 4.05rem);
+      line-height: 1.06;
+      letter-spacing: -0.038em;
+      font-weight: 740;
+    }
+
+    .page-hero p {
+      max-width: 720px;
+      color: var(--muted);
+      font-size: 1.12rem;
+      line-height: 1.72;
+    }
+
+    .about-story {
+      display: grid;
+      gap: 16px;
+    }
+
+    .story-card {
+      padding: 26px;
+      border-radius: 24px;
+    }
+
+    .story-card h3 {
+      margin-bottom: 10px;
+      font-size: 1.45rem;
+      letter-spacing: -0.045em;
+    }
+
+    .story-card p {
+      color: var(--muted);
+    }
+
+    .staff-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .staff-card {
+      min-height: 260px;
+      padding: 24px;
+      border-radius: 24px;
+    }
+
+    .staff-avatar {
+      width: 58px;
+      height: 58px;
+      margin-bottom: 22px;
+      border-radius: 18px;
+      background: var(--navy);
+      color: #7db5ff;
+      display: grid;
+      place-items: center;
+      font-weight: 900;
+      letter-spacing: -0.04em;
+    }
+
+    .staff-card h3 {
+      margin-bottom: 4px;
+      font-size: 1.22rem;
+      letter-spacing: -0.035em;
+    }
+
+    .staff-title {
+      margin-bottom: 12px;
+      color: var(--blue);
+      font-size: 0.88rem;
+      font-weight: 800;
+    }
+
+    .staff-card p {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    /* =========================================================
+       15. RESPONSIVE DESIGN
+       ========================================================= */
+
+    @media (max-width: 1080px) {
+      .hero {
+        grid-template-columns: 1fr;
+        gap: 52px;
+        padding-top: 78px;
+      }
+
+      .hero-content {
+        max-width: 760px;
+      }
+
+      .hero h1 {
+        max-width: 12ch;
+      }
+
+      .hero-preview {
+        justify-content: center;
+      }
+
+      .dashboard-image-frame {
+        width: min(100%, 860px);
+        max-width: 860px;
+        margin-inline: auto;
+        transform: none;
+      }
+
+      .trust-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 940px) {
+      .hero,
+      .split,
+      .contact-wrap,
+      .cta-inner,
+      .page-hero-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .grid-3,
+      .timeline,
+      .staff-grid,
+      .timeline-wide {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .nav-links {
+        display: none;
+      }
+
+      .hero,
+      .section {
+        padding-inline: 18px;
+      }
+
+      .hero {
+        padding-top: 58px;
+      }
+
+      .grid-3,
+      .grid-2,
+      .timeline,
+      .timeline-wide,
+      .staff-grid,
+      form,
+      .trust-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .cta {
+        padding-inline: 18px;
+      }
+
+      .cta-inner {
+        padding: 32px;
+        border-radius: 28px;
+      }
+
+      .footer {
+        flex-direction: column;
+        padding-inline: 18px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- =========================================================
+       NAVIGATION
+       ========================================================= -->
+
+  <header class="nav">
+    <div class="nav-inner">
+      <a class="brand" href="#home">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none">
+            <path d="M6 6h4v4H6V6Zm8 0h4v4h-4V6ZM6 14h4v4H6v-4Zm8 0h4v4h-4v-4Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+          </svg>
+        </span>
+        TrialCore
+      </a>
+
+      <nav class="nav-links" aria-label="Primary navigation">
+        <a href="#platform">Platform</a>
+        <a href="#features">Features</a>
+        <a href="#safety">Safety &amp; Compliance</a>
+        <a href="#about-page">About</a>
+        <a href="#contact">Contact</a>
+      </nav>
+
+      <a class="button button-dark" href="#contact">Request demo</a>
+    </div>
+  </header>
+
+  <!-- =========================================================
+       HOME PAGE
+       ========================================================= -->
+
+  <main id="home-page" class="page-view active">
+    <!-- HERO SECTION -->
+    <section class="hero" id="home">
+      <div class="hero-content">
+        <div class="eyebrow"><span></span> Clinical trial management overview</div>
+
+        <h1>Trial operations without spreadsheet chaos.</h1>
+
+        <p>
+          TrialCore is a modern clinical trial management system for clinical research coordinators,
+          research teams, study administrators, supervisors, and auditors. It brings participants,
+          visits, tasks, safety reporting, deviations, protocol versions, reports, and audit logs into
+          one clear workspace.
+        </p>
+
+        <div class="hero-actions">
+          <a class="button button-primary" href="#contact">Request a demo</a>
+          <a class="button button-secondary" href="#platform">Explore the platform</a>
+        </div>
+
+        <div class="hero-note">Coordinator-informed. Operational first. Compliance minded.</div>
+      </div>
+
+      <div class="hero-preview">
+        <div class="dashboard-image-frame" aria-label="TrialCore dashboard preview">
+          <img
+            class="dashboard-image"
+            src="trialcore-dashboard-preview.png"
+            alt="TrialCore dashboard preview"
+          />
+        </div>
+      </div>
+    </section>
+
+    <!-- TRUST STRIP -->
+    <section class="trust-strip" aria-label="TrialCore platform strengths">
+      <p>Trusted by research teams committed to better outcomes.</p>
+
+      <div class="trust-grid">
+        <div class="trust-item">
+          <span>◇</span>
+          <div>
+            <strong>Audit ready</strong>
+            <small>Complete audit trails and status history.</small>
+          </div>
+        </div>
+
+        <div class="trust-item">
+          <span>♙</span>
+          <div>
+            <strong>Participant focused</strong>
+            <small>Manage the full participant lifecycle with clarity.</small>
+          </div>
+        </div>
+
+        <div class="trust-item">
+          <span>□</span>
+          <div>
+            <strong>Protocol aligned</strong>
+            <small>Visits, tasks, and deviations tie back to the protocol.</small>
+          </div>
+        </div>
+
+        <div class="trust-item">
+          <span>⌂</span>
+          <div>
+            <strong>Secure by design</strong>
+            <small>Role-based access and data protection.</small>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PLATFORM SECTION -->
+    <section class="section" id="platform">
+      <div class="section-header center">
+        <div class="kicker">Platform</div>
+        <h2>One clear workspace for study coordination.</h2>
+        <p>
+          TrialCore organizes trials, participants, visits, protocol versions, screening criteria,
+          tasks, reports, and audit logs in a shared operational model.
+        </p>
+      </div>
+
+      <div class="grid-2">
+        <div class="panel">
+          <h3>What the platform organizes</h3>
+          <p class="body-text">
+            Trials, participants, visits, protocol versions, screening criteria, tasks, reports,
+            and audit logs live together so study teams can follow the work without added visual noise.
+          </p>
+        </div>
+
+        <div class="panel">
+          <h3>Designed to match how teams actually work</h3>
+          <ul class="list">
+            <li>Screening criteria stay visible where coordinators need them.</li>
+            <li>Tasks, reports, and logs stay tied to the study record.</li>
+            <li>Auditable history is available without extra navigation.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="grid-3" style="margin-top: 16px;">
+        <article class="feature-card">
+          <div class="feature-icon">01</div>
+          <h3>Trials</h3>
+          <p>Keep each study’s structure, status, and operational context in one place from setup to closeout.</p>
+        </article>
+
+        <article class="feature-card">
+          <div class="feature-icon">02</div>
+          <h3>Participants</h3>
+          <p>Track enrollment progress, study status, participant history, and visit progress with clarity.</p>
+        </article>
+
+        <article class="feature-card">
+          <div class="feature-icon">03</div>
+          <h3>Protocol versions</h3>
+          <p>Keep protocol changes and version history aligned to study operations and participant activity.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- FEATURES SECTION -->
+    <section class="section compact" id="features">
+      <div class="section-header center">
+        <div class="kicker">Features</div>
+        <h2>Essential features, presented without clutter.</h2>
+        <p>
+          TrialCore keeps the focus on the work itself: participants, visits, safety,
+          and the record that proves it all happened correctly.
+        </p>
+      </div>
+
+      <div class="grid-3">
+        <article class="feature-card">
+          <div class="feature-icon">PT</div>
+          <h3>Participant Tracking</h3>
+          <p>Follow participant status from screening through closeout.</p>
+        </article>
+
+        <article class="feature-card">
+          <div class="feature-icon">VM</div>
+          <h3>Visit Management</h3>
+          <p>Track visit windows, schedules, milestones, and study tasks without clutter.</p>
+        </article>
+
+        <article class="feature-card">
+          <div class="feature-icon">TM</div>
+          <h3>Task Management</h3>
+          <p>Keep operational work organized across teams, participants, visits, and studies.</p>
+        </article>
+
+        <article class="feature-card">
+          <div class="feature-icon">SR</div>
+          <h3>Safety Reporting</h3>
+          <p>Document safety events and review history in study context.</p>
+        </article>
+
+        <article class="feature-card">
+          <div class="feature-icon">PD</div>
+          <h3>Protocol Deviations</h3>
+          <p>Capture deviations with clear record keeping, actions, follow-up, and traceability.</p>
+        </article>
+
+        <article class="feature-card">
+          <div class="feature-icon">AT</div>
+          <h3>Audit Trails</h3>
+          <p>Preserve an auditable history of changes and updates across study records.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- WORKFLOW SECTION -->
+    <section class="section" id="workflows">
+      <div class="split">
+        <div class="section-header">
+          <div class="kicker">Coordinator workflows</div>
+          <h2>Built around the way studies actually run.</h2>
+          <p>
+            Clinical research operations change daily. TrialCore keeps study teams aligned as visits move,
+            participants progress, documents become due, and safety or deviation follow-up needs attention.
+          </p>
+        </div>
+
+        <div class="check-list">
+          <div class="list-item">
+            <div class="check">✓</div>
+            <div>
+              <strong>Status-driven participant flow</strong>
+              <span>Status changes reflect screening, enrollment, accrual, follow-up, completion, and withdrawal events.</span>
+            </div>
+          </div>
+
+          <div class="list-item">
+            <div class="check">✓</div>
+            <div>
+              <strong>Task work queue</strong>
+              <span>Surface open tasks, overdue items, and required documents across study visits.</span>
+            </div>
+          </div>
+
+          <div class="list-item">
+            <div class="check">✓</div>
+            <div>
+              <strong>Study-level dashboards</strong>
+              <span>View active trials, upcoming visits, open deviations, recent adverse events, and SAE activity.</span>
+            </div>
+          </div>
+
+          <div class="list-item">
+            <div class="check">✓</div>
+            <div>
+              <strong>Role-based access</strong>
+              <span>Administrators, supervisors, study staff, and auditors each get the right level of access.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SAFETY SECTION -->
+    <section class="section compact" id="safety">
+      <div class="split">
+        <div class="section-header">
+          <div class="kicker">Safety &amp; Compliance</div>
+          <h2>Built to support trustworthy study documentation.</h2>
+          <p>
+            TrialCore keeps safety information and compliance records organized so research teams can move
+            with confidence and maintain traceability.
+          </p>
+        </div>
+
+        <div class="panel">
+          <div class="product-mini">
+            <div class="product-mini-top">
+              <span>TrialCore · Documentation View</span>
+              <span>Audit-ready</span>
+            </div>
+
+            <div class="product-mini-body">
+              <div class="mini-row">
+                <div>
+                  <strong>Adverse Events</strong>
+                  <small>Capture event details and keep them tied to the study record.</small>
+                </div>
+                <span class="pill">Safety</span>
+              </div>
+
+              <div class="mini-row">
+                <div>
+                  <strong>Protocol Deviations</strong>
+                  <small>Track deviations, actions, and follow-up in one trail.</small>
+                </div>
+                <span class="pill">Compliance</span>
+              </div>
+
+              <div class="mini-row">
+                <div>
+                  <strong>Regulatory Documentation</strong>
+                  <small>Keep supporting records organized and easy to reference.</small>
+                </div>
+                <span class="pill">Records</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT PREVIEW SECTION -->
+    <div class="about-band" id="about">
+      <section class="section">
+        <div class="split">
+          <div class="section-header">
+            <div class="kicker">About</div>
+            <h2>Built around coordinator workflows, not generic software assumptions.</h2>
+            <p>
+              TrialCore is a CTMS designed for the real pace of research teams, with study operations,
+              compliance, and workflow efficiency at the center.
+            </p>
+          </div>
+
+          <div class="stack">
+            <div class="rail">
+              <strong>Coordinator-informed</strong>
+              <span>Built to match how study teams move through the day.</span>
+            </div>
+
+            <div class="rail">
+              <strong>Operational first</strong>
+              <span>Focused on study work instead of enterprise ceremony.</span>
+            </div>
+
+            <div class="rail">
+              <strong>Compliance minded</strong>
+              <span>Clear, traceable, and calm by default.</span>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- PROCESS SECTION -->
+    <section class="section">
+      <div class="section-header center">
+        <div class="kicker">How it works</div>
+        <h2>From study setup to audit review.</h2>
+      </div>
+
+      <div class="timeline">
+        <div class="timeline-step">
+          <div class="step-number">1</div>
+          <strong>Create study</strong>
+          <span>Add trial details, team roles, and protocol-level settings.</span>
+        </div>
+
+        <div class="timeline-step">
+          <div class="step-number">2</div>
+          <strong>Build schedule</strong>
+          <span>Create protocol visits, windows, optional visits, and completion rules.</span>
+        </div>
+
+        <div class="timeline-step">
+          <div class="step-number">3</div>
+          <strong>Enroll participant</strong>
+          <span>Assign the correct visit schedule and begin participant-level tracking.</span>
+        </div>
+
+        <div class="timeline-step">
+          <div class="step-number">4</div>
+          <strong>Manage events</strong>
+          <span>Track visits, documents, AEs, deviations, and reporting dates.</span>
+        </div>
+
+        <div class="timeline-step">
+          <div class="step-number">5</div>
+          <strong>Review reports</strong>
+          <span>Use dashboards, reports, and audit trails for oversight.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section class="section compact" id="contact">
+      <div class="section-header center">
+        <div class="kicker">Contact</div>
+        <h2>Request a demo.</h2>
+        <p>Share a few details and we’ll follow up with the right next step.</p>
+      </div>
+
+      <div class="contact-wrap">
+        <div class="panel">
+          <form onsubmit="event.preventDefault(); document.querySelector('[data-form-status]').textContent='Thank you — this demo form is ready to connect to your preferred backend or email service.';">
+            <div class="field">
+              <label for="name">Name</label>
+              <input id="name" name="name" type="text" autocomplete="name" />
+            </div>
+
+            <div class="field">
+              <label for="organization">Organization</label>
+              <input id="organization" name="organization" type="text" autocomplete="organization" />
+            </div>
+
+            <div class="field">
+              <label for="role">Role</label>
+              <input id="role" name="role" type="text" autocomplete="organization-title" />
+            </div>
+
+            <div class="field">
+              <label for="email">Email</label>
+              <input id="email" name="email" type="email" autocomplete="email" />
+            </div>
+
+            <div class="field full">
+              <label for="message">Message</label>
+              <textarea id="message" name="message"></textarea>
+            </div>
+
+            <div class="form-actions">
+              <button class="button button-primary" type="submit">Request Demo</button>
+              <a class="button button-secondary" href="mailto:hello@trialcore.com">Email Us</a>
+            </div>
+
+            <p class="field full body-text" data-form-status aria-live="polite" style="font-size: 0.9rem;"></p>
+          </form>
+        </div>
+
+        <div class="stack">
+          <div class="panel">
+            <h3>What to expect</h3>
+            <p class="body-text">
+              We’ll use your message to understand your study workflow and whether TrialCore is a fit for your team.
+            </p>
+          </div>
+
+          <div class="rail">
+            <strong>Best for</strong>
+            <span>Clinical research coordinators, research teams, and study administrators.</span>
+          </div>
+
+          <div class="rail">
+            <strong>Focus</strong>
+            <span>Participant lifecycle management, protocol execution, visit scheduling, safety reporting, and regulatory documentation.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FINAL CTA -->
+    <section class="cta">
+      <div class="cta-inner">
+        <div>
+          <h2>Give your study team one place to work.</h2>
+          <p>
+            TrialCore helps clinical research teams coordinate participants, manage visits, document safety events,
+            track deviations, and maintain audit-ready oversight.
+          </p>
+        </div>
+
+        <a class="button button-primary" href="#contact">Request demo</a>
+      </div>
+    </section>
+  </main>
+
+  <!-- =========================================================
+       ABOUT PAGE
+       This is a separate page inside the same HTML file.
+       ========================================================= -->
+
+  <main id="about-page" class="page-view">
+    <section class="page-hero page-hero-grid">
+      <div>
+        <div class="eyebrow"><span></span> About TrialCore</div>
+
+        <h1>Built by clinical research professionals to simplify study operations.</h1>
+
+        <p>
+          TrialCore was created to address a familiar problem in clinical research: study management
+          information is often spread across spreadsheets, shared drives, emails, regulatory binders,
+          and disconnected systems. As studies become more complex, teams spend increasing amounts of
+          time tracking operational work instead of focusing on participants, protocol execution, and data quality.
+        </p>
+      </div>
+
+      <aside class="panel">
+        <h3>Company focus</h3>
+        <ul class="list" style="margin-top: 14px;">
+          <li>Coordinator-informed product design</li>
+          <li>Participant-centered study operations</li>
+          <li>Protocol-driven visit and task tracking</li>
+          <li>Safety, deviation, and audit-ready documentation</li>
+        </ul>
+      </aside>
+    </section>
+
+    <section class="section compact">
+      <div class="split">
+        <div class="section-header">
+          <div class="kicker">Our mission</div>
+          <h2>Make clinical research operations simpler, clearer, and more reliable.</h2>
+          <p>
+            TrialCore gives research teams a centralized operational workspace for participant management,
+            protocol execution, safety reporting, deviations, documentation, and study oversight.
+          </p>
+        </div>
+
+        <div class="about-story">
+          <div class="story-card">
+            <h3>Why TrialCore exists</h3>
+            <p>
+              Many CTMS platforms are designed for large enterprise environments and can introduce unnecessary
+              complexity for day-to-day study management. TrialCore was built to provide the structure research
+              teams need without the visual or operational heaviness that slows coordinators down.
+            </p>
+          </div>
+
+          <div class="story-card">
+            <h3>What it is meant to be</h3>
+            <p>
+              TrialCore is not intended to replace every research system. It is designed to become the operational
+              hub that connects study teams to the information they need most: participant status, visit schedules,
+              tasks, safety events, deviations, documents, reports, and audit trails.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section compact">
+      <div class="section-header center">
+        <div class="kicker">Leadership team</div>
+        <h2>Company staff</h2>
+        <p>
+          TrialCore is currently founder-led, with future clinical operations and engineering roles planned as the platform grows.
+        </p>
+      </div>
+
+      <div class="staff-grid">
+        <article class="staff-card">
+          <div class="staff-avatar">MA</div>
+          <h3>Matt Adolphsen</h3>
+          <div class="staff-title">Founder &amp; Product Lead</div>
+          <p>
+            Clinical research coordinator with firsthand experience managing participant visits, protocol compliance,
+            safety reporting, deviations, regulatory documentation, and day-to-day study operations. TrialCore was
+            developed from real coordinator workflow needs.
+          </p>
+        </article>
+
+        <article class="staff-card">
+          <div class="staff-avatar">CO</div>
+          <h3>Clinical Operations</h3>
+          <div class="staff-title">Future Team Role</div>
+          <p>
+            Planned role focused on translating clinical research workflows into scalable platform practices,
+            implementation support, and customer success for study teams.
+          </p>
+        </article>
+
+        <article class="staff-card">
+          <div class="staff-avatar">EN</div>
+          <h3>Engineering</h3>
+          <div class="staff-title">Future Team Role</div>
+          <p>
+            Planned role focused on platform reliability, security, integrations, reporting, and product development
+            as TrialCore expands.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section compact">
+      <div class="section-header center">
+        <div class="kicker">Built for research teams</div>
+        <h2>Designed for the people responsible for keeping studies moving.</h2>
+      </div>
+
+      <div class="grid-2">
+        <div class="rail">
+          <strong>Clinical Research Coordinators</strong>
+          <span>Participant management, visit scheduling, documentation, and workflow tracking.</span>
+        </div>
+
+        <div class="rail">
+          <strong>Study Administrators</strong>
+          <span>Oversight, reporting, user management, and operational monitoring.</span>
+        </div>
+
+        <div class="rail">
+          <strong>Investigators</strong>
+          <span>Participant progress, safety review, and protocol compliance visibility.</span>
+        </div>
+
+        <div class="rail">
+          <strong>Auditors &amp; Compliance Teams</strong>
+          <span>Read-only access, audit trails, and documentation review.</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section compact">
+      <div class="section-header center">
+        <div class="kicker">Timeline</div>
+        <h2>The TrialCore story.</h2>
+      </div>
+
+      <div class="timeline-wide">
+        <div class="timeline-step">
+          <div class="step-number">2025</div>
+          <strong>Initial concept</strong>
+          <span>TrialCore began as a response to the fragmented tracking tools commonly used in clinical research operations.</span>
+        </div>
+
+        <div class="timeline-step">
+          <div class="step-number">2026</div>
+          <strong>Platform framework</strong>
+          <span>The core workflow framework was shaped around participants, protocol visits, safety events, deviations, reports, and audit history.</span>
+        </div>
+
+        <div class="timeline-step">
+          <div class="step-number">Next</div>
+          <strong>Expansion</strong>
+          <span>TrialCore will continue expanding into advanced study management, reporting, implementation support, and enterprise research operations.</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta">
+      <div class="cta-inner">
+        <div>
+          <h2>Help shape the future of clinical research operations.</h2>
+          <p>
+            See how TrialCore can support participant management, protocol execution, safety reporting,
+            deviations, documentation, and audit-ready oversight.
+          </p>
+        </div>
+
+        <a class="button button-primary" href="#contact">Request demo</a>
+      </div>
+    </section>
+  </main>
+
+  <!-- =========================================================
+       FOOTER
+       ========================================================= -->
+
+  <footer class="footer">
+    <div>© 2026 TrialCore. All rights reserved.</div>
+    <div>Clinical trial management for research teams</div>
+  </footer>
+
+  <!-- =========================================================
+       SIMPLE PAGE ROUTING SCRIPT
+       This lets About behave like a separate page while staying
+       inside one HTML file.
+       ========================================================= -->
+
+  <script>
+    (() => {
+      const views = {
+        home: document.getElementById("home-page"),
+        about: document.getElementById("about-page")
+      };
+
+      function setActiveView(name) {
+        Object.values(views).forEach((view) => view.classList.remove("active"));
+        (views[name] || views.home).classList.add("active");
+      }
+
+      function route() {
+        const hash = window.location.hash.replace("#", "");
+
+        if (hash === "about-page" || hash === "about") {
+          setActiveView("about");
+          window.scrollTo({ top: 0, behavior: "smooth" });
+          return;
+        }
+
+        setActiveView("home");
+
+        if (hash && hash !== "home") {
+          const target = document.getElementById(hash);
+
+          if (target) {
+            window.requestAnimationFrame(() => {
+              target.scrollIntoView({ behavior: "smooth", block: "start" });
+            });
+            return;
+          }
+        }
+
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+
+      document.querySelectorAll('a[href^="#"]').forEach((link) => {
+        link.addEventListener("click", (event) => {
+          const href = link.getAttribute("href");
+
+          if (!href || href === "#") return;
+
+          event.preventDefault();
+          history.pushState(null, "", href);
+          route();
+        });
+      });
+
+      window.addEventListener("popstate", route);
+      route();
+    })();
+  </script>
+</body>
+</html>
