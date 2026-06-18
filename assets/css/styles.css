@@ -11,6 +11,8 @@
   --muted: #61708a;
   --border: #dce5f2;
   --max: 1240px;
+  --page-gutter: clamp(18px, 2vw, 24px);
+  --section-width: 860px;
   --shadow: 0 22px 54px rgba(15, 23, 42, 0.07);
   --shadow-strong: 0 30px 78px rgba(15, 27, 47, 0.18);
   --radius-lg: 28px;
@@ -90,10 +92,11 @@ button {
   backdrop-filter: blur(18px);
 }
 
+/* Global container system: all major site regions share one centered max-width and gutter. */
 .header-inner {
   max-width: var(--max);
   margin: 0 auto;
-  padding: 18px 24px;
+  padding: 18px var(--page-gutter);
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -200,12 +203,14 @@ main {
 .section,
 .cta,
 .footer {
-  width: min(100%, var(--max));
-  margin: 0 auto;
+  width: 100%;
+  max-width: var(--max);
+  margin-inline: auto;
 }
 
 .hero {
-  padding: 92px 24px 84px;
+  width: min(100%, var(--max));
+  padding: 92px var(--page-gutter) 84px;
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 0.92fr);
   gap: 72px;
@@ -300,14 +305,15 @@ h1 {
 }
 
 .trust-strip {
-  padding: 30px 24px 34px;
+  padding: 30px var(--page-gutter) 34px;
   border-top: 1px solid var(--border);
   border-bottom: 1px solid var(--border);
   background: linear-gradient(180deg, #fff 0%, #f5f8fc 100%);
 }
 
 .trust-strip > p {
-  margin: 0 0 24px;
+  max-width: var(--section-width);
+  margin: 0 auto 24px;
   color: var(--muted);
   text-align: center;
   font-weight: 700;
@@ -342,16 +348,11 @@ h1 {
 
 .page-hero,
 .section {
-  padding: 92px 24px 76px;
+  padding: 92px var(--page-gutter) 76px;
 }
 
 .page-stack > section + section {
   border-top: 1px solid var(--border);
-}
-
-.safety-page .page-hero,
-.safety-page .section {
-  width: min(100%, 1480px);
 }
 
 .page-hero {
@@ -362,9 +363,9 @@ h1 {
 }
 
 .page-hero h1 {
+  max-width: var(--section-width);
   font-size: clamp(2.3rem, 4.4vw, 4.05rem);
   line-height: 1.06;
-  max-width: 900px;
 }
 
 .section {
@@ -383,8 +384,9 @@ h1 {
   padding-top: 48px;
 }
 
+/* Section width system: reuse a single measured width for section headings and intro copy. */
 .section-header {
-  max-width: 780px;
+  max-width: var(--section-width);
   margin-bottom: 42px;
 }
 
@@ -439,7 +441,7 @@ h1 {
 }
 
 .wide-spread {
-  max-width: 1100px;
+  max-width: var(--section-width);
 }
 
 .cards-top {
@@ -525,7 +527,7 @@ h1 {
 }
 
 .page-hero-copy {
-  max-width: 940px;
+  max-width: var(--section-width);
 }
 
 .safety-page .feature-card {
@@ -591,6 +593,7 @@ h1 {
 
 .document-preview {
   max-width: 860px;
+  margin-inline: auto;
 }
 
 .trust-layer-grid {
@@ -629,7 +632,7 @@ h1 {
 }
 
 .workflow-section .section-header {
-  max-width: 920px;
+  max-width: var(--section-width);
 }
 
 .workflow-grid {
@@ -877,7 +880,7 @@ textarea:focus {
 
 .cta {
   margin-bottom: 42px;
-  padding: 0 24px;
+  padding: 0 var(--page-gutter);
 }
 
 .cta-inner {
@@ -905,7 +908,7 @@ textarea:focus {
 }
 
 .footer {
-  padding: 28px 24px 46px;
+  padding: 28px var(--page-gutter) 46px;
   border-top: 1px solid var(--border);
   color: var(--muted);
   font-size: 0.9rem;
@@ -917,7 +920,7 @@ textarea:focus {
 .site-footer {
   width: min(100%, var(--max));
   margin: 0 auto;
-  padding: 34px 24px 48px;
+  padding: 34px var(--page-gutter) 48px;
   border-top: 1px solid var(--border);
   color: var(--muted);
   display: grid;
@@ -1065,7 +1068,7 @@ textarea:focus {
   padding-left: 20px;
 }
 
-/* Mobile and tablet layouts stack cleanly here. */
+/* Responsive breakpoint strategy: collapse multi-column layouts gradually while keeping gutters consistent. */
 @media (max-width: 1080px) {
   .hero,
   .page-hero {
@@ -1088,6 +1091,11 @@ textarea:focus {
 
   .resource-columns {
     grid-template-columns: minmax(0, 1fr);
+  }
+
+  .one-line-heading {
+    white-space: normal;
+    text-wrap: balance;
   }
 }
 
@@ -1123,7 +1131,6 @@ textarea:focus {
 
 @media (max-width: 720px) {
   .header-inner {
-    padding-inline: 18px;
     align-items: flex-start;
   }
 
@@ -1135,12 +1142,6 @@ textarea:focus {
   .brand-logo {
     height: 40px;
     max-width: min(190px, 42vw);
-  }
-
-  .hero,
-  .page-hero,
-  .section {
-    padding-inline: 18px;
   }
 
   .one-line-heading {
@@ -1193,7 +1194,7 @@ textarea:focus {
   }
 
   .cta {
-    padding-inline: 18px;
+    padding-inline: 0;
   }
 
   .cta-inner {
@@ -1202,6 +1203,6 @@ textarea:focus {
   }
 
   .site-footer {
-    padding-inline: 18px;
+    padding-inline: 0;
   }
 }
