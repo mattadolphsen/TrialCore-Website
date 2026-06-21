@@ -11,6 +11,7 @@
   --muted: #61708a;
   --border: #dce5f2;
   --max: 1240px;
+  --content-max: 1180px;
   --page-gutter: clamp(18px, 2vw, 24px);
   --section-width: 860px;
   --shadow: 0 22px 54px rgba(15, 23, 42, 0.07);
@@ -93,6 +94,11 @@ button {
 }
 
 /* Global container system: all major site regions share one centered max-width and gutter. */
+.site-container {
+  width: min(calc(100% - 48px), var(--content-max));
+  margin-inline: auto;
+}
+
 .header-inner {
   max-width: var(--max);
   margin: 0 auto;
@@ -204,12 +210,12 @@ main {
 .cta,
 .footer {
   width: 100%;
-  max-width: var(--max);
+  max-width: var(--content-max);
   margin-inline: auto;
 }
 
 .hero {
-  width: min(100%, var(--max));
+  width: min(100%, var(--content-max));
   padding: 92px var(--page-gutter) 84px;
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 0.92fr);
@@ -305,14 +311,16 @@ h1 {
 }
 
 .trust-strip {
-  padding: 30px var(--page-gutter) 34px;
+  padding: 30px 0 34px;
   border-top: 1px solid var(--border);
   border-bottom: 1px solid var(--border);
   background: linear-gradient(180deg, #fff 0%, #f5f8fc 100%);
+  width: 100%;
 }
 
 .trust-strip > p {
-  max-width: var(--section-width);
+  width: 100%;
+  max-width: none;
   margin: 0 auto 24px;
   color: var(--muted);
   text-align: center;
@@ -323,20 +331,47 @@ h1 {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 24px;
+  width: 100%;
 }
 
 .trust-item {
-  display: flex;
-  gap: 14px;
-  align-items: flex-start;
+  min-height: 280px;
+  padding: 30px 28px 26px;
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  background: #fff;
+  box-shadow: 0 16px 36px rgba(15, 23, 42, 0.05);
+  display: grid;
+  align-content: start;
+  gap: 18px;
 }
 
-.trust-item > span {
-  color: var(--blue);
-  font-size: 1.3rem;
-  font-weight: 900;
-  line-height: 1;
-  margin-top: 2px;
+.trust-icon {
+  width: 40px;
+  height: 40px;
+  color: #5166b8;
+}
+
+.trust-icon svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.trust-item strong {
+  display: block;
+  margin-bottom: 10px;
+  color: var(--text);
+  font-size: 1.5rem;
+  line-height: 1.08;
+  letter-spacing: -0.04em;
+}
+
+.trust-item p {
+  margin: 0;
+  color: #3f434b;
+  font-size: 1rem;
+  line-height: 1.55;
 }
 
 .trust-item small {
@@ -386,7 +421,8 @@ h1 {
 
 /* Section width system: reuse a single measured width for section headings and intro copy. */
 .section-header {
-  max-width: var(--section-width);
+  width: 100%;
+  max-width: var(--content-max);
   margin-bottom: 42px;
 }
 
@@ -395,8 +431,15 @@ h1 {
 }
 
 .section-header.center {
+  width: 100%;
+  max-width: 900px;
   margin-inline: auto;
   text-align: center;
+}
+
+.section-header.center p {
+  max-width: 860px;
+  margin-inline: auto;
 }
 
 .panel-note {
@@ -430,6 +473,9 @@ h1 {
 .info-grid {
   display: grid;
   gap: 16px;
+  width: 100%;
+  max-width: var(--content-max);
+  margin-inline: auto;
 }
 
 .grid-2 {
@@ -441,7 +487,7 @@ h1 {
 }
 
 .wide-spread {
-  max-width: var(--section-width);
+  max-width: var(--content-max);
 }
 
 .cards-top {
@@ -527,7 +573,7 @@ h1 {
 }
 
 .page-hero-copy {
-  max-width: var(--section-width);
+  max-width: var(--content-max);
 }
 
 .safety-page .feature-card {
@@ -565,6 +611,9 @@ h1 {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 16px;
+  width: 100%;
+  max-width: var(--content-max);
+  margin-inline: auto;
 }
 
 .comparison-card {
@@ -600,6 +649,9 @@ h1 {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 16px;
+  width: 100%;
+  max-width: var(--content-max);
+  margin-inline: auto;
 }
 
 .trust-layer-grid strong {
@@ -632,7 +684,7 @@ h1 {
 }
 
 .workflow-section .section-header {
-  max-width: var(--section-width);
+  max-width: var(--content-max);
 }
 
 .workflow-grid {
@@ -640,6 +692,9 @@ h1 {
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 18px;
   align-items: start;
+  width: 100%;
+  max-width: var(--content-max);
+  margin-inline: auto;
 }
 
 .workflow-grid > .panel:first-child {
@@ -722,6 +777,9 @@ h1 {
   grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
   gap: 54px;
   align-items: start;
+  width: 100%;
+  max-width: var(--content-max);
+  margin-inline: auto;
 }
 
 .stack {
@@ -820,6 +878,9 @@ h1 {
   grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
   gap: 24px;
   align-items: start;
+  width: 100%;
+  max-width: var(--content-max);
+  margin-inline: auto;
 }
 
 form {
@@ -893,6 +954,9 @@ textarea:focus {
   grid-template-columns: minmax(0, 1fr) auto;
   gap: 28px;
   align-items: center;
+  width: 100%;
+  max-width: var(--content-max);
+  margin-inline: auto;
 }
 
 .cta p {
@@ -918,7 +982,7 @@ textarea:focus {
 }
 
 .site-footer {
-  width: min(100%, var(--max));
+  width: min(100%, var(--content-max));
   margin: 0 auto;
   padding: 34px var(--page-gutter) 48px;
   border-top: 1px solid var(--border);
@@ -960,6 +1024,9 @@ textarea:focus {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 18px;
+  width: 100%;
+  max-width: var(--content-max);
+  margin-inline: auto;
 }
 
 .footer-grid h3 {
@@ -996,6 +1063,9 @@ textarea:focus {
   border-radius: 22px;
   background: rgba(255, 255, 255, 0.78);
   box-shadow: 0 16px 36px rgba(15, 23, 42, 0.05);
+  width: 100%;
+  max-width: var(--content-max);
+  margin-inline: auto;
 }
 
 .tab-button {
@@ -1046,6 +1116,9 @@ textarea:focus {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 18px;
+  width: 100%;
+  max-width: var(--content-max);
+  margin-inline: auto;
 }
 
 .resource-columns section {
@@ -1158,6 +1231,10 @@ textarea:focus {
   .trust-grid,
   form {
     grid-template-columns: minmax(0, 1fr);
+  }
+
+  .trust-item {
+    min-height: 0;
   }
 
   .list-two-col {
