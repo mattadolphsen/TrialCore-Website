@@ -319,9 +319,10 @@ h1 {
 }
 
 .trust-header .one-line-heading {
-  max-width: 900px;
-  margin: 0 auto;
   white-space: normal;
+  text-wrap: balance;
+  max-width: 1100px;
+  margin-inline: auto;
 }
 
 .trust-header .kicker {
