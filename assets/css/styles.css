@@ -319,11 +319,8 @@ h1 {
 }
 
 .trust-header {
-  width: 100%;
   max-width: 900px;
-  margin-left: auto;
-  margin-right: auto;
-  text-align: center;
+  margin: 0 auto 36px;
 }
 
 .trust-header .kicker {
