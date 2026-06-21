@@ -311,7 +311,7 @@ h1 {
 }
 
 .trust-strip {
-  padding: 56px 0 56px;
+  padding: 56px 0 40px;
   border-top: 1px solid var(--border);
   border-bottom: 1px solid var(--border);
   background: linear-gradient(180deg, #fff 0%, #f5f8fc 100%);
@@ -410,11 +410,11 @@ h1 {
 }
 
 .platform-page .trust-strip {
-  padding-bottom: 56px;
+  padding-bottom: 40px;
 }
 
 .platform-page .section {
-  padding-top: 32px;
+  padding-top: 36px;
 }
 
 .section.compact {
@@ -462,7 +462,8 @@ h1 {
 }
 
 .section h2,
-.cta h2 {
+.cta h2,
+.trust-header h2 {
   margin-bottom: 18px;
   font-size: clamp(2rem, 3vw, 3.25rem);
   line-height: 1.08;
