@@ -311,7 +311,7 @@ h1 {
 }
 
 .trust-strip {
-  padding: 56px 0 72px;
+  padding: 56px 0 56px;
   border-top: 1px solid var(--border);
   border-bottom: 1px solid var(--border);
   background: linear-gradient(180deg, #fff 0%, #f5f8fc 100%);
@@ -410,7 +410,7 @@ h1 {
 }
 
 .platform-page .trust-strip {
-  padding-bottom: 72px;
+  padding-bottom: 56px;
 }
 
 .platform-page .section {
@@ -430,6 +430,10 @@ h1 {
 
 .platform-page .section-header {
   margin-bottom: 56px;
+}
+
+.platform-page .trust-header {
+  margin-bottom: 28px;
 }
 
 .section-header.center {
