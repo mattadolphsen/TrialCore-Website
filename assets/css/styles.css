@@ -311,7 +311,7 @@ h1 {
 }
 
 .trust-strip {
-  padding: 16px 0 24px;
+  padding: 12px 0 24px;
   border-top: 1px solid var(--border);
   border-bottom: 1px solid var(--border);
   background: linear-gradient(180deg, #fff 0%, #f5f8fc 100%);
