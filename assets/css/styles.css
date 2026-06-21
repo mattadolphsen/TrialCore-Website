@@ -605,7 +605,7 @@ h1 {
 
 .founder-photo-wrap {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   margin-bottom: 24px;
 }
 
