@@ -324,9 +324,8 @@ h1 {
   margin-bottom: 16px;
 }
 
-.trust-header h2 {
-  margin: 0;
-  color: var(--text);
+.trust-header .kicker {
+  text-transform: none;
 }
 
 .trust-grid {
