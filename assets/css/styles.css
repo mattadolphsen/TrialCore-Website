@@ -324,14 +324,9 @@ h1 {
   margin-bottom: 16px;
 }
 
-.trust-header p {
-  max-width: 900px;
-  margin: 0 auto;
-  color: #5166b8;
-  text-align: center;
-  font-size: 1.05rem;
-  font-weight: 500;
-  letter-spacing: -0.01em;
+.trust-header h2 {
+  margin: 0;
+  color: var(--text);
 }
 
 .trust-grid {
