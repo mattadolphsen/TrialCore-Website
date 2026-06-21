@@ -603,6 +603,20 @@ h1 {
   min-height: 100%;
 }
 
+.founder-photo-wrap {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 24px;
+}
+
+.founder-photo {
+  width: 50%;
+  max-width: 280px;
+  height: auto;
+  border-radius: 12px;
+  object-fit: cover;
+}
+
 .panel-muted {
   background: rgba(255, 255, 255, 0.72);
 }
