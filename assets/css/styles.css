@@ -218,7 +218,7 @@ main {
   width: min(100%, var(--content-max));
   padding: 92px var(--page-gutter) 84px;
   display: grid;
-  grid-template-columns: minmax(0, 0.75fr) minmax(0, 1.25fr);
+  grid-template-columns: minmax(0, 1fr) minmax(0, 0.92fr);
   gap: 40px;
   align-items: center;
 }
