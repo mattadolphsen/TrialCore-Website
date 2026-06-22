@@ -33,7 +33,7 @@ html {
 
 body {
   margin: 0;
-  font-family: Inter, "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: "Aptos", "Aptos Display", "Segoe UI", Arial, sans-serif;
   background:
     radial-gradient(circle at top right, rgba(37, 99, 255, 0.07), transparent 26%),
     radial-gradient(circle at top left, rgba(15, 27, 47, 0.045), transparent 22%),
