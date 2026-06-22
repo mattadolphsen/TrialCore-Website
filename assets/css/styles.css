@@ -303,6 +303,9 @@ h1 {
   border-radius: 28px;
   background: #fff;
   box-shadow: var(--shadow);
+
+  transform: scale(1.12);
+  transform-origin: center;
 }
 
 .hero-image {
