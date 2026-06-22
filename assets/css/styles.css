@@ -219,7 +219,7 @@ main {
   padding: 92px var(--page-gutter) 84px;
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 0.92fr);
-  gap: 40px;
+  gap: 54px;
   align-items: center;
 }
 
