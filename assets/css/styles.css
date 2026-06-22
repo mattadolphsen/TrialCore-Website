@@ -645,7 +645,7 @@ h1 {
 }
 
 .comparison-negative .list li::before {
-  content: "✕";
+  content: "âœ•";
   color: #ef4444;
 }
 
@@ -790,7 +790,7 @@ h1 {
 }
 
 .list li::before {
-  content: "✓";
+  content: "âœ“";
   position: absolute;
   left: 0;
   color: var(--blue);
@@ -1307,4 +1307,287 @@ textarea:focus {
   .site-footer {
     padding-inline: 0;
   }
+}
+/* TrialCore marketing site theme update
+   Darker, database-like palette with the same Aptos family and sky accent.
+   Appended as a safe theme layer so the original layout, spacing, grids,
+   responsive rules, and structural CSS remain intact. */
+:root {
+  --navy: #08111f;
+  --navy-2: #0f172a;
+  --blue: #38bdf8;
+  --blue-soft: rgba(56, 189, 248, 0.12);
+  --bg: #08111f;
+  --surface: rgba(15, 23, 42, 0.86);
+  --surface-2: rgba(30, 41, 59, 0.72);
+  --surface-solid: #0f172a;
+  --text: #e2e8f0;
+  --muted: #94a3b8;
+  --border: rgba(148, 163, 184, 0.18);
+  --shadow: 0 24px 80px rgba(0, 0, 0, 0.35);
+  --shadow-strong: 0 32px 92px rgba(2, 6, 23, 0.55);
+}
+
+body {
+  font-family: "Aptos", "Aptos Display", "Segoe UI", "Inter", "SF Pro Text", Arial, sans-serif;
+  background:
+    radial-gradient(circle at top left, rgba(56, 189, 248, 0.16), transparent 28%),
+    radial-gradient(circle at top right, rgba(34, 197, 94, 0.10), transparent 24%),
+    linear-gradient(180deg, #06101c 0%, #0f172a 44%, #08111f 100%);
+  color: var(--text);
+}
+
+:focus-visible {
+  outline: 3px solid rgba(56, 189, 248, 0.35);
+}
+
+.skip-link {
+  background: var(--navy-2);
+  color: #fff;
+}
+
+.site-header {
+  background: rgba(8, 17, 31, 0.82);
+  border-bottom: 1px solid var(--border);
+}
+
+.site-nav {
+  color: #cbd5e1;
+}
+
+.site-nav a:hover,
+.site-nav a[aria-current="page"] {
+  color: #fff;
+}
+
+.button-primary {
+  background: linear-gradient(135deg, #38bdf8, #2563eb);
+  color: #fff;
+  box-shadow: 0 14px 28px rgba(56, 189, 248, 0.18);
+}
+
+.button-primary:hover {
+  box-shadow: 0 16px 32px rgba(56, 189, 248, 0.24);
+}
+
+.button-dark {
+  background: var(--navy-2);
+  color: #fff;
+  box-shadow: 0 14px 28px rgba(2, 6, 23, 0.18);
+}
+
+.button-secondary {
+  background: rgba(15, 23, 42, 0.72);
+  color: var(--text);
+  border-color: var(--border);
+}
+
+.button-secondary:hover {
+  border-color: rgba(56, 189, 248, 0.35);
+  background: rgba(15, 23, 42, 0.9);
+}
+
+.eyebrow {
+  background: rgba(56, 189, 248, 0.10);
+  border-color: rgba(56, 189, 248, 0.18);
+  color: #7dd3fc;
+}
+
+.eyebrow span {
+  background: #38bdf8;
+}
+
+.hero-frame,
+.trust-item,
+.panel,
+.feature-card,
+.staff-card,
+.rail,
+.comparison-card,
+.tab-panel,
+.resource-columns section,
+.status-card,
+.product-mini,
+.mini-row,
+input,
+textarea {
+  background: var(--surface);
+  border-color: var(--border);
+  box-shadow: var(--shadow);
+}
+
+.hero-frame {
+  overflow: hidden;
+}
+
+.trust-strip {
+  background: linear-gradient(180deg, rgba(8, 17, 31, 0.96), rgba(15, 23, 42, 0.92));
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.trust-item strong,
+.panel h3,
+.feature-card h3,
+.staff-card h3,
+.comparison-card h3,
+.footer-grid h3,
+.section h2,
+.cta h2,
+.trust-header h2,
+.resource-intro h3,
+.resource-columns h4,
+.status-card h4,
+.mini-row strong,
+.trust-layer-grid strong,
+label {
+  color: #f8fafc;
+}
+
+.trust-item p,
+.trust-item small,
+.hero p,
+.page-hero p,
+.body-text,
+.feature-card p,
+.rail span,
+.footer,
+.site-footer,
+.footer-grid a,
+.form-assurance,
+.status-card p,
+.comparison-card p,
+.form-note,
+.mini-row small,
+.list {
+  color: var(--muted);
+}
+
+.trust-icon,
+.feature-icon,
+.pill,
+.status-step,
+.role,
+.kicker {
+  color: #7dd3fc;
+}
+
+.feature-icon,
+.pill,
+.status-step {
+  background: rgba(56, 189, 248, 0.12);
+}
+
+.panel:hover,
+.feature-card:hover,
+.staff-card:hover,
+.comparison-card:hover,
+.tab-panel:hover {
+  border-color: rgba(56, 189, 248, 0.22);
+  box-shadow: 0 20px 44px rgba(2, 6, 23, 0.22);
+}
+
+.panel-muted {
+  background: rgba(15, 23, 42, 0.62);
+}
+
+.comparison-highlight,
+.status-card-terminal {
+  border-color: rgba(56, 189, 248, 0.20);
+  background: linear-gradient(180deg, rgba(15, 23, 42, 0.9), rgba(8, 17, 31, 0.96));
+}
+
+.comparison-negative .list li::before {
+  color: #fb7185;
+}
+
+.list li::before {
+  color: #38bdf8;
+}
+
+.product-mini-top {
+  background: linear-gradient(135deg, #0f172a, #111827);
+  color: #cbd5e1;
+}
+
+.mini-row {
+  background: rgba(15, 23, 42, 0.76);
+}
+
+input,
+textarea {
+  background: rgba(15, 23, 42, 0.92);
+  color: var(--text);
+  border: 1px solid rgba(148, 163, 184, 0.22);
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #64748b;
+}
+
+input:focus,
+textarea:focus {
+  border-color: rgba(56, 189, 248, 0.65);
+  box-shadow: 0 0 0 4px rgba(56, 189, 248, 0.14);
+}
+
+.cta-inner {
+  background: linear-gradient(180deg, rgba(15, 23, 42, 0.98), rgba(8, 17, 31, 0.96));
+  border: 1px solid rgba(56, 189, 248, 0.16);
+  box-shadow: var(--shadow-strong);
+}
+
+.cta p {
+  color: #b8c4d5;
+}
+
+.cta .button-primary {
+  background: #fff;
+  color: var(--navy);
+  box-shadow: none;
+}
+
+.site-footer,
+.footer {
+  border-top: 1px solid var(--border);
+}
+
+.tab-list {
+  background: rgba(15, 23, 42, 0.72);
+  border-color: var(--border);
+  box-shadow: var(--shadow);
+}
+
+.tab-button {
+  color: var(--muted);
+}
+
+.tab-button[aria-selected="true"],
+.tab-button.is-active {
+  background: linear-gradient(135deg, #38bdf8, #2563eb);
+  color: #fff;
+  border-color: transparent;
+  box-shadow: 0 12px 24px rgba(56, 189, 248, 0.18);
+}
+
+.resource-columns section {
+  background: rgba(15, 23, 42, 0.76);
+}
+
+.footer-brand strong,
+.footer-grid h3,
+.footer-copyright {
+  color: #f8fafc;
+}
+
+.footer-version {
+  color: var(--muted);
+}
+
+.brand,
+.site-nav,
+.footer-grid a,
+.button {
+  letter-spacing: -0.01em;
 }
