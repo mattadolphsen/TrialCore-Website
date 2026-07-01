@@ -308,7 +308,7 @@ h2 {
 }
 
 h3 {
-  font-size: 1.38rem;
+  font-size: 1.75rem;
   line-height: 1.12;
 }
 
@@ -319,7 +319,7 @@ h4 {
 
 p {
   color: var(--muted);
-  font-size: 1.1rem;
+  font-size: 1.3rem;
   line-height: 1.7;
 }
 
@@ -338,7 +338,7 @@ label {
 .kicker {
   margin-bottom: 14px;
   color: #7dd3fc;
-  font-size: 0.82rem;
+  font-size: 1.1rem;
   font-weight: 900;
   letter-spacing: 0.09em;
   text-transform: uppercase;
@@ -740,6 +740,7 @@ label {
 
 .list li {
   position: relative;
+   font-size: 1.3rem;
   padding-left: 28px;
 }
 
